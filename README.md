@@ -1,6 +1,7 @@
-# aws-governed-lakehouse
-A governed data lakehouse on AWS using Lake Formation and Apache Iceberg for secure, scalable analytics.
+# 🏗️ AWS Governed Data Lakehouse
+**Secure, Scalable Analytics with Lake Formation & Apache Iceberg**
 
+A governed data lakehouse on AWS that ingests operational data from multiple sources, transforms it through medallion-architecture zones (Landing → Curated → Presentation), and enforces fine-grained access control with Lake Formation all backed by Apache Iceberg for ACID transactions and schema evolution.
 
 ## 📝 License
 
