@@ -17,6 +17,26 @@ A governed data lakehouse on AWS that ingests operational data from multiple sou
 
 </div>
 
+## 💡 Problem Statement
+
+Organizations need to decouple analytical workloads from production OLTP databases while maintaining strict data governance. Running ad-hoc queries directly on transactional systems degrades performance, and opening up data lake access without governance creates compliance and security risks.
+
+### **This project solves both problems by implementing:**
+
+1. **Governed Data Lakehouse** — A three-zone architecture (Landing → Curated → Presentation) where every resource is governed by **AWS Lake Formation** with tag-based access control (TBAC), ensuring only authorized roles and users access specific data.
+
+2. **ACID-Compliant Table Format** — **Apache Iceberg** tables registered with the AWS Glue Catalog enable MERGE INTO upserts, schema evolution (ALTER TABLE ADD COLUMNS), and time-travel queries — going beyond immutable Parquet-on-S3.
+
+3. **Role-Separated Access** — Distinct IAM roles for Lake Formation registration, data lake administration, Glue ETL execution, and ML consumer access — enforcing the principle of least privilege at every layer.
+
+## 🏛️ Architecture
+
+![Lakehouse Architecture](./images/architecture.png)
+
+**End-to-End Data Flow:**
+
+The system ingests data from two sources — an **RDS MySQL** transactional database (batch CSV) and a **streaming JSON** source (ratings data). Both flows land in the **Landing Zone** on S3, are transformed by **AWS Glue PySpark** jobs with schema enforcement and metadata enrichment into the **Curated Zone**, and surface as Iceberg tables registered in the **Glue Catalog** for **Athena** queries — all governed by **Lake Formation** permissions.
+
 ## 📝 License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
