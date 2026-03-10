@@ -33,7 +33,7 @@ Organizations need to decouple analytical workloads from production OLTP databas
 
 ![Lakehouse Architecture](./images/architecture.png)
 
-**End-to-End Data Flow:**
+### End-to-End Data Flow:
 
 The system ingests data from two sources — an **RDS MySQL** transactional database (batch CSV) and a **streaming JSON** source (ratings data). Both flows land in the **Landing Zone** on S3, are transformed by **AWS Glue PySpark** jobs with schema enforcement and metadata enrichment into the **Curated Zone**, and surface as Iceberg tables registered in the **Glue Catalog** for **Athena** queries — all governed by **Lake Formation** permissions.
 
